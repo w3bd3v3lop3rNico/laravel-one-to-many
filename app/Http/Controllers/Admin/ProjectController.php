@@ -4,16 +4,30 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Project;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class ProjectController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $query = Project::limit(20);
+
+        if (isset($data['title'])) {
+            $query = $query->where('title', 'like', "%{$data['title']}%")->limit(20);
+        }
+
+        $projects = $query->get();
+
+        return view("admin.projects.index", compact("projects"));
+
     }
 
     /**
@@ -21,7 +35,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.projects.create');
     }
 
     /**
@@ -29,7 +43,17 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required|max:255|string|unique:projects',
+            'description' => 'nullable|min:5|string',
+            // 'category_id' => 'nullable|exists:categories,id'
+        ]);
+        $data = $request->all();
+        $data['slug'] = Str::slug($data['title'], '-');
+
+        $project = Project::create($data);
+
+        return redirect()->route('admin.projects.show', $project);
     }
 
     /**
@@ -37,7 +61,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        //
+        return view('admin.projects.show', compact('project'));
     }
 
     /**
