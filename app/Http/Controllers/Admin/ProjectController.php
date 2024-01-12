@@ -71,7 +71,9 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('admin.projects.edit', compact('project'));
+        $types = Type::orderBy('name', 'ASC')->get();
+
+        return view('admin.projects.edit', compact('project', 'types'));
     }
 
     /**
@@ -82,7 +84,7 @@ class ProjectController extends Controller
         $request->validate([
             'title' => ['required', 'max:255', 'string', Rule::unique('projects')->ignore($project->id)],
             'description' => 'nullable|min:5|string',
-            // 'category_id' => 'nullable|exists:categories,id'
+            'type_id' => 'nullable|exists:types,id'
         ]);
         $data = $request->all();
 
