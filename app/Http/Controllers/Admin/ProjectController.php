@@ -48,7 +48,7 @@ class ProjectController extends Controller
         $request->validate([
             'title' => 'required|max:255|string|unique:projects',
             'description' => 'nullable|min:5|string',
-            // 'category_id' => 'nullable|exists:categories,id'
+            'type_id' => 'nullable|exists:types,id'
         ]);
         $data = $request->all();
         $data['slug'] = Str::slug($data['title'], '-');
