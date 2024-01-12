@@ -33,7 +33,7 @@
     </section>
     <section>
       <div class="container">
-        {!! $project->content !!}
+        {{ $project->description }}
       </div>
     </section>
 @endsection

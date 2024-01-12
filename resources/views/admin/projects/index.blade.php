@@ -13,6 +13,7 @@
           <tr>
             <td></td>
             <td>
+              {{-- form per la ricerca del titolo --}}
               <form action="{{ route('admin.projects.index') }}" method="GET">
                 <input placeholder="filtra per titolo" class="form-control" type="text" name="title" value="{{ request()->get('title') }}">
               </form>
