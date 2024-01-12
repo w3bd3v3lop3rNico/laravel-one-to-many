@@ -4,14 +4,14 @@
     <section>
       <div class="container">
         <h1>{{ $project->title }}</h1>
-        {{-- @if($project->category)
+        @if($project->type)
         <p>
           <strong>
-          {{ $project->category->name }}
+          {{ $project->type->name }}
           </strong>
         </p>
-        @endif --}}
-        {{-- @dump($post->category()) --}}
+        @endif 
+        {{-- @dump($post->type())--}}
         <p>{{ $project->slug }}</p>
         <p>{{ $project->created_at->format('d/m/Y') }}</p>
       </div>
