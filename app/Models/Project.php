@@ -13,11 +13,11 @@ class Project extends Model
         'title',
         'description',
         'slug',
-        'category_id',
+        'type_id',
     ];
 
-    public function category()
+    public function type()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Type::class);
     }
 }
