@@ -22,15 +22,15 @@
           <input type="text" readonly required class="form-control" name="slug" id="slug" placeholder="Titolo del progetto" value="{{ old('slug',$project->slug) }}">
         </div>
 
-        {{-- <div class="mb-3">
-          <label for="category_id" class="form-label">Categories</label>
-          <select name="category_id" class="form-control" id="category_id">
+        <div class="mb-3">
+          <label for="type_id" class="form-label">Categories</label>
+          <select name="type_id" class="form-control" id="type_id">
             <option>Seleziona una categoria</option>
-            @foreach($categories as $category)
-              <option @selected( old('category_id', optional($project->category)->id ) == $category->id ) value="{{ $category->id }}">{{ $category->name }}</option>
+            @foreach($types as $type)
+              <option @selected( old('type_id', optional($project->type)->id ) == $type->id ) value="{{ $type->id }}">{{ $type->name }}</option>
             @endforeach
           </select>
-        </div> --}}
+        </div>
 
         <div class="mb-3">
           <label for="content"  class="form-label">Post content</label>
@@ -38,7 +38,7 @@
         </div>
 
         <div class="mb-3">
-          <input type="submit" class="btn btn-primary " value="Crea">
+          <input type="submit" class="btn btn-primary " value="Save">
         </div>
       </form>
 
